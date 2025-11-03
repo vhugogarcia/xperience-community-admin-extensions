@@ -31,11 +31,27 @@
           "System.Text.Json": "8.0.5"
         }
       },
+      "Markdig": {
+        "type": "Direct",
+        "requested": "[0.43.0, )",
+        "resolved": "0.43.0",
+        "contentHash": "tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg=="
+      },
       "SonarAnalyzer.CSharp": {
         "type": "Direct",
         "requested": "[9.6.0.74858, )",
         "resolved": "9.6.0.74858",
         "contentHash": "tBwiOBYcoSyHVUejjz6iH3VOpSFx7gJSuQ3695BQaoqQBcqy0IeRsKAk5FAR4fbm3QLyEM9bimKk1l038TFN2w=="
+      },
+      "XperienceCommunity.Localization": {
+        "type": "Direct",
+        "requested": "[2.0.1, )",
+        "resolved": "2.0.1",
+        "contentHash": "bqeKZya78aQkvJsFDyeO8fYYv1ROw3p/J6oNflYP96H+kFmtIUIMB7v9w6UM9x0Ev7zutpBCWHTqecBbMngF2w==",
+        "dependencies": {
+          "Kentico.Xperience.Admin": "30.0.0",
+          "XperienceCommunity.Localization.Base": "2.0.1"
+        }
       },
       "AngleSharp": {
         "type": "Transitive",
@@ -980,6 +996,14 @@
         "type": "Transitive",
         "resolved": "4.5.4",
         "contentHash": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg=="
+      },
+      "XperienceCommunity.Localization.Base": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "W0nIuafLbf8wCg/6fqSTt9rBOx+smNHoUf/yxPLy9U6a+wxcS6/ssmYmkd32T8kFjvRBdLnopxToxJd9QJScLw==",
+        "dependencies": {
+          "Kentico.Xperience.Core": "30.0.0"
+        }
       },
       "Yarp.ReverseProxy": {
         "type": "Transitive",

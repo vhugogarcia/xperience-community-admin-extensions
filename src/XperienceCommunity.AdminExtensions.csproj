@@ -9,6 +9,35 @@
 		<HotChocolateImplicitUsings>disable</HotChocolateImplicitUsings>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<AdminOrgName>xperiencecommunity</AdminOrgName>
+		<!-- Set to 'true' to use development build with full React error messages -->
+		<UseDevBuild Condition="'$(UseDevBuild)' == ''">false</UseDevBuild>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<AdminClientPath Include="Client\dist\**">
+			<ProjectName>admin-extensions</ProjectName>
+		</AdminClientPath>
+	</ItemGroup>
+	
+	<!-- Build client assets before compilation -->
+	<Target Name="BuildClientAssets" BeforeTargets="BeforeBuild" Condition="'$(DesignTimeBuild)' != 'true'">
+		<Exec Command="npm run build:dev" WorkingDirectory="$(MSBuildProjectDirectory)\Client" Condition="'$(UseDevBuild)' == 'true'" />
+		<Exec Command="npm run build" WorkingDirectory="$(MSBuildProjectDirectory)\Client" Condition="'$(UseDevBuild)' != 'true'" />
+	</Target>
+
+	<ItemGroup>
+		<Folder Include="Client\dist\" />
+		<Compile Remove="Client\node_modules\**" />
+		<EmbeddedResource Remove="Client\node_modules\**" />
+		<None Remove="Client\node_modules\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="nul" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<AssemblyAttribute Include="CMS.AssemblyDiscoverableAttribute"></AssemblyAttribute>
 	</ItemGroup>
@@ -16,6 +45,7 @@
 	<ItemGroup>
 		<PackageReference Include="Kentico.Xperience.WebApp" />
 		<PackageReference Include="Kentico.Xperience.Admin" />
-		
+		<PackageReference Include="Markdig" />
+        <PackageReference Include="XperienceCommunity.Localization" />
 	</ItemGroup>
 </Project>

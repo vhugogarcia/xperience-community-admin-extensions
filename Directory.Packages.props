@@ -11,6 +11,8 @@
     <PackageVersion Include="Kentico.Xperience.Cloud" Version="30.6.0" />
     <PackageVersion Include="Kentico.Xperience.Imageprocessing" Version="30.6.0" />
     <PackageVersion Include="Kentico.Xperience.WebApp" Version="30.6.0" />
+    <PackageVersion Include="Markdig" Version="0.43.0" />
+    <PackageVersion Include="XperienceCommunity.Localization" Version="2.0.1" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />
   </ItemGroup>
 </Project>

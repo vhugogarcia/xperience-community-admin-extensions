@@ -1,0 +1,37 @@
+{
+  "name": "xperiencecommunity-admin-extensions",
+  "version": "1.2.0",
+  "description": "Kentico Xperience Community Admin Extensions",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack serve --mode development",
+    "dev:buildlike": "cross-env NODE_ENV=development webpack serve --mode development --env buildlike=true",
+    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "build:dev": "cross-env NODE_ENV=development webpack --mode=development"
+  },
+  "dependencies": {
+    "@kentico/xperience-admin-base": "30.6.0",
+    "@kentico/xperience-admin-components": "30.6.0",
+    "css-loader": "^7.1.2",
+    "postcss-loader": "^8.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "style-loader": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@kentico/xperience-webpack-config": "30.6.0",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "babel-loader": "^10.0.0",
+    "cross-env": "^10.1.0",
+    "typescript": "^5.7.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
