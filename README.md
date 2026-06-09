@@ -50,6 +50,8 @@ The package supports optional configuration to customize certain features. Add t
 
 **Clear Event Log Button**: Adds a convenient "Clear" button to the Event Log page header, allowing administrators to quickly clear all event log entries with a single click.
 
+> **Note for contributors:** All `[PageCommand]` methods must accept at least one parameter (even an empty DTO) to avoid a framework-level `ArgumentNullException`. A parameterless command method causes the Kentico framework to send a null POST body, which `Command.GetParameters` rejects.
+
 ### Content Hub Enhancements
 
 **Custom Page Size**: Allows configuration of the number of items displayed per page in the Content Hub list. This helps administrators manage large content repositories more efficiently by customizing the page size to their preference.
