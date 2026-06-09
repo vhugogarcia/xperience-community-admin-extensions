@@ -10,9 +10,10 @@ This package provides useful extensions to the Kentico Xperience administration 
 
 | Xperience Version | Library Version |
 |-------------------|-----------------|
+| >= 31.5.3         | >= 1.3.0        |
 | >= 30.6.0         | >= 1.0.0        |
 
-> **Note:** The latest version that has been tested is 30.6.0
+> **Note:** The latest version that has been tested is 31.5.3
 
 ## ⚙️ Package Installation
 
@@ -24,7 +25,14 @@ dotnet add package XperienceCommunity.AdminExtensions
 
 ## 🚀 Quick Start
 
-No additional configuration is required! Once the package is installed, the admin extensions will be automatically registered and available in your Kentico Xperience administration interface.
+Most extensions are automatically registered once the package is installed. However, the **Documentation Tab** feature requires the following registration in your `Program.cs`:
+
+```csharp
+builder.Services.AddLocalization();
+builder.Services.AddXperienceCommunityLocalization();
+```
+
+All other extensions (Event Log clear button, Content Hub page size, Content Type filtering) work without any additional setup.
 
 ## ⚙️ Configuration
 
@@ -49,8 +57,6 @@ The package supports optional configuration to customize certain features. Add t
 ### Event Log Enhancements
 
 **Clear Event Log Button**: Adds a convenient "Clear" button to the Event Log page header, allowing administrators to quickly clear all event log entries with a single click.
-
-> **Note for contributors:** All `[PageCommand]` methods must accept at least one parameter (even an empty DTO) to avoid a framework-level `ArgumentNullException`. A parameterless command method causes the Kentico framework to send a null POST body, which `Command.GetParameters` rejects.
 
 ### Content Hub Enhancements
 
@@ -81,7 +87,9 @@ The filter supports multi-selection, enabling administrators to view content typ
 
 #### Setup Instructions
 
-This feature depends on the `XperienceCommunity.Localization` package (already included as a dependency). To add documentation for your content types:
+This feature depends on the `XperienceCommunity.Localization` package (already included as a dependency). See [Quick Start](#-quick-start) for the required `Program.cs` registration.
+
+To add documentation for your content types:
 
 1. **Add Localization Keys**: Add localization keys following the pattern:
    ```

@@ -19,18 +19,18 @@ namespace XperienceCommunity.AdminExtensions;
 public sealed class DocumentationTab : WebPageBase<DocumentationTabProperties>
 {
     private readonly IContentQueryExecutor contentQueryExecutor;
-    private readonly IHtmlLocalizer<SharedResources> htmlLocalizer;
+    private readonly IStringLocalizer<SharedResources> localizer;
 
     public DocumentationTab(
         IWebPageManagerFactory webPageManagerFactory,
         IAuthenticatedUserAccessor authenticatedUserAccessor,
         IPageLinkGenerator pageLinkGenerator,
         IContentQueryExecutor contentQueryExecutor,
-        IHtmlLocalizer<SharedResources> htmlLocalizer)
+        IStringLocalizer<SharedResources> localizer)
         : base(authenticatedUserAccessor, webPageManagerFactory, pageLinkGenerator)
     {
         this.contentQueryExecutor = contentQueryExecutor;
-        this.htmlLocalizer = htmlLocalizer;
+        this.localizer = localizer;
     }
 
     public override async Task<DocumentationTabProperties> ConfigureTemplateProperties(DocumentationTabProperties properties)
@@ -53,9 +53,9 @@ public sealed class DocumentationTab : WebPageBase<DocumentationTabProperties>
         string contentTypeName = currentPageItem.ContentTypeName;
         properties.ContentTypeName = contentTypeName;
 
-        // Retrieve the markdown content from the localizer using the pattern: XperienceCommunity.AdminExtensions.DocumentationTab.[CONTENTYPENAME]
         string localizationKey = $"XperienceCommunity.AdminExtensions.DocumentationTab.{contentTypeName}";
-        string markdownContent = htmlLocalizer.GetHtmlStringOrDefault(localizationKey, new HtmlString("")).ToString();
+        var localizedString = localizer[localizationKey];
+        string markdownContent = localizedString.ResourceNotFound ? string.Empty : localizedString.Value;
 
         // Validate if the markdown content is empty or whitespace
         if (string.IsNullOrWhiteSpace(markdownContent))
