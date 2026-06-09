@@ -1,31 +1,20 @@
-﻿using CMS.EventLog;
+﻿using CMS.DataEngine;
+using CMS.EventLog;
 
-using Kentico.Xperience.Admin.Base;
-using Kentico.Xperience.Admin.Base.Authentication;
 using Kentico.Xperience.Admin.Base.UIPages;
-
-using Microsoft.AspNetCore.Http;
-
-using XperienceCommunity.AdminExtensions;
 
 [assembly: PageExtender(typeof(EventLogExtender))]
 namespace XperienceCommunity.AdminExtensions;
 
 public class EventLogExtender : PageExtender<EventLogList>
 {
-    private readonly IHttpContextAccessor httpContextAccessor;
-    private readonly IAuthenticatedUserAccessor authenticatedUserAccessor;
+    private readonly IInfoProvider<EventLogInfo> eventLogInfoProvider;
 
-    public EventLogExtender(IHttpContextAccessor httpContextAccessor,
-                            IAuthenticatedUserAccessor authenticatedUserAccessor)
-    {
-        this.httpContextAccessor = httpContextAccessor;
-        this.authenticatedUserAccessor = authenticatedUserAccessor;
-    }
+    public EventLogExtender(IInfoProvider<EventLogInfo> eventLogInfoProvider) => this.eventLogInfoProvider = eventLogInfoProvider;
 
     public override Task ConfigurePage()
     {
-        Page.PageConfiguration.HeaderActions.AddCommand("Clear", "Clear");
+        Page.PageConfiguration.HeaderActions.AddCommand("Clear", nameof(Clear));
 
         return base.ConfigurePage();
     }
@@ -33,15 +22,9 @@ public class EventLogExtender : PageExtender<EventLogList>
     [PageCommand]
     public async Task<ICommandResponse> Clear()
     {
-        var user = await authenticatedUserAccessor.Get();
-        var httpContext = httpContextAccessor.HttpContext;
+        IWhereCondition where = new WhereCondition("1=1");
+        eventLogInfoProvider.BulkDelete(where);
 
-        if (httpContext?.Connection?.RemoteIpAddress == null)
-        {
-            return Response().AddErrorMessage("Unable to clear event log due to missing IP address.");
-        }
-
-        EventLogHelper.ClearEventLog(user.UserID, user.UserName, httpContext.Connection.RemoteIpAddress.ToString());
         return Response().UseCommand("LoadData").AddSuccessMessage("Event log cleared.");
     }
 }
