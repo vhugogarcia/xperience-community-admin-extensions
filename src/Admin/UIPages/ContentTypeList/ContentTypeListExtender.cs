@@ -18,9 +18,9 @@ public class ContentTypeListExtender : PageExtender<ContentTypeList>
     {
         _ = base.ConfigurePage();
 
-        if (Page.PageConfiguration.FilterFormModel is null)
+        if (Page.PageConfiguration.FilterConfiguration.FormModel is null)
         {
-            Page.PageConfiguration.FilterFormModel = new ContentTypeListMultiFilter();
+            Page.PageConfiguration.FilterConfiguration.FormModel = new ContentTypeListMultiFilter();
         }
         else
         {

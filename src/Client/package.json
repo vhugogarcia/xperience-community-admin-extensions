@@ -1,6 +1,6 @@
 {
   "name": "xperiencecommunity-admin-extensions",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Kentico Xperience Community Admin Extensions",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "build:dev": "cross-env NODE_ENV=development webpack --mode=development"
   },
   "dependencies": {
-    "@kentico/xperience-admin-base": "30.6.0",
-    "@kentico/xperience-admin-components": "30.6.0",
+    "@kentico/xperience-admin-base": "31.5.3",
+    "@kentico/xperience-admin-components": "31.5.3",
     "css-loader": "^7.1.2",
     "postcss-loader": "^8.2.0",
     "react": "^18.3.1",
@@ -24,7 +24,7 @@
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
-    "@kentico/xperience-webpack-config": "30.6.0",
+    "@kentico/xperience-webpack-config": "31.5.3",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "babel-loader": "^10.0.0",

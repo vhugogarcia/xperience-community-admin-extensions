@@ -2,8 +2,7 @@
 global using CMS.Websites;
 
 global using Microsoft.Extensions.Configuration;
-global using Microsoft.AspNetCore.Mvc.Localization;
-global using Microsoft.AspNetCore.Html;
+global using Microsoft.Extensions.Localization;
 
 global using Kentico.Xperience.Admin.Base;
 global using Kentico.Xperience.Admin.Websites.UIPages;
