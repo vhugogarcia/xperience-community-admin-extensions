@@ -10,7 +10,7 @@ This package provides useful extensions to the Kentico Xperience administration 
 
 | Xperience Version | Library Version |
 |-------------------|-----------------|
-| >= 31.5.3         | >= 1.3.0        |
+| >= 31.5.3         | >= 1.4.0        |
 | >= 30.6.0         | >= 1.0.0        |
 
 > **Note:** The latest version that has been tested is 31.5.3
@@ -32,7 +32,7 @@ builder.Services.AddLocalization();
 builder.Services.AddXperienceCommunityLocalization();
 ```
 
-All other extensions (Event Log clear button, Content Hub page size, Content Type filtering) work without any additional setup.
+All other extensions (Event Log clear button, Content Hub page size, Content Type filtering, Delete all contacts button) work without any additional setup.
 
 ## ⚙️ Configuration
 
@@ -71,6 +71,15 @@ The package supports optional configuration to customize certain features. Add t
 - **Headless** - Content types used for headless/API content delivery
 
 The filter supports multi-selection, enabling administrators to view content types across multiple usage categories simultaneously.
+
+### Contact Management Enhancements
+
+**Delete All Contacts Button**: Adds a "Delete all contacts" button to the header of the **Contact management > Contacts** page, allowing administrators to remove every contact in one action.
+
+- A confirmation dialog is shown before anything is deleted, displaying the **total number of contacts** that will be removed.
+- The confirmation explains that all **activities, recalculation queues, and contact group memberships** related to those contacts will also be deleted, and that the action cannot be undone.
+- Deletion uses Kentico's official `IContactsBulkDeletionService`, which removes contacts in batches and cleans up the related data.
+- Once deletion completes, a success notification is shown asking you to refresh the page to see the updated list.
 
 ### Documentation Tab
 
