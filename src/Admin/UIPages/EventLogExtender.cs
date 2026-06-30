@@ -25,6 +25,6 @@ public class EventLogExtender : PageExtender<EventLogList>
         IWhereCondition where = new WhereCondition("1=1");
         eventLogInfoProvider.BulkDelete(where);
 
-        return Response().UseCommand("LoadData").AddSuccessMessage("Event log cleared.");
+        return Response().AddSuccessMessage("Event log cleared. Please refresh the page to see the updated list.");
     }
 }
