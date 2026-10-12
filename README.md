@@ -10,10 +10,11 @@ This package provides useful extensions to the Kentico Xperience administration 
 
 | Xperience Version | Library Version |
 |-------------------|-----------------|
+| >= 31.7.2         | >= 1.5.0        |
 | >= 31.5.3         | >= 1.4.0        |
 | >= 30.6.0         | >= 1.0.0        |
 
-> **Note:** The latest version that has been tested is 31.5.3
+> **Note:** The latest version that has been tested is 31.7.2
 
 ## ⚙️ Package Installation
 
@@ -80,6 +81,19 @@ The filter supports multi-selection, enabling administrators to view content typ
 - The confirmation explains that all **activities, recalculation queues, and contact group memberships** related to those contacts will also be deleted, and that the action cannot be undone.
 - Deletion uses Kentico's official `IContactsBulkDeletionService`, which removes contacts in batches and cleans up the related data.
 - Once deletion completes, a success notification is shown asking you to refresh the page to see the updated list.
+
+### Member Management Enhancements
+
+**New Member Button**: Adds a "New member" button to the header of the **Members** application list, so administrators can register a member from the administration instead of through a form on the live site.
+
+- The form asks for a **user name**, **email address**, **password**, **password confirmation**, and whether the member is **enabled**.
+- All fields are validated: required values, email format, maximum lengths, and matching passwords. The password is checked against the site's **ASP.NET Identity password options** (`IdentityOptions.Password`), since that is the policy members sign in under.
+- **Duplicates are rejected**: a member cannot be created with an email address or user name that another member already uses. A user name also cannot match another member's email address, or vice versa.
+- An enabled member can sign in right away. No email is sent to the member.
+- After saving, the member's edit page opens, where any custom member fields can be filled in.
+- The page requires the **Create** permission for the Members application.
+
+> **Note:** The password is hashed with the default ASP.NET Identity `PasswordHasher`. A site that registers a custom `IPasswordHasher<TUser>` for its members is not supported by this page.
 
 ### Documentation Tab
 
