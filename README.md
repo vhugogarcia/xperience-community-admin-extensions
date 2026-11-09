@@ -33,7 +33,7 @@ builder.Services.AddLocalization();
 builder.Services.AddXperienceCommunityLocalization();
 ```
 
-All other extensions (Event Log clear button, Content Hub page size, Content Type filtering, Delete all contacts button) work without any additional setup.
+All other extensions (Event Log clear button, Content Hub page size, Content Type filtering, Delete all contacts button, New member button, License information) work without any additional setup.
 
 ## ⚙️ Configuration
 
@@ -94,6 +94,27 @@ The filter supports multi-selection, enabling administrators to view content typ
 - The page requires the **Create** permission for the Members application.
 
 > **Note:** The password is hashed with the default ASP.NET Identity `PasswordHasher`. A site that registers a custom `IPasswordHasher<TUser>` for its members is not supported by this page.
+
+### License Enhancements
+
+**License Information Callout**: Adds a callout to the **Settings > System > License** page, just below the built-in license synchronization tip, so administrators can see the key details of the current license at a glance:
+
+- **Status** - Valid, In grace period, Expired, or Not valid
+- **Key type** - Production, Development, Trial, or Non-production
+- **Expiration** - The key's expiration date (UTC) and the number of days left
+- **Channels** and **Microchannels** - The channel limits allowed by the license
+
+The callout switches to a warning style when:
+
+- the license is not valid or is in its grace period,
+- the license has expired (the callout also gets a "License expired" headline, because the admin UI has no error callout style), or
+- a Development key, or a license token, expires within 30 days.
+
+For license keys other than Development keys, the callout also includes a note explaining that the expiration date is the key's current validity (typically up to one month), which is refreshed automatically during license synchronization and doesn't mean the subscription ends earlier. Because that date is always close, these keys don't get the 30-day warning. See [Subscription expiration and renewal](https://docs.kentico.com/documentation/developers-and-admins/installation/licenses#subscription-expiration-and-renewal) in the Kentico documentation.
+
+- Only data exposed by Kentico's public licensing API is shown. The license tier, issue date, and owner account are not displayed.
+- The callout is hidden when no license is set.
+- If the license data can't be read (for example, on a SaaS instance that returns it in a different shape), the callout is hidden and a warning is written once to the **Event log** (source `LicenseSettingsExtender`, event code `LICENSE_DETAILS_CALLOUT`). The rest of the License page works as usual.
 
 ### Documentation Tab
 
